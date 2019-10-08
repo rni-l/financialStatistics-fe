@@ -1,0 +1,166 @@
+@import './variable.scss';
+
+// mixins
+@mixin f-backgroundCover($imgUrl) {
+  background-image: url($imgUrl);
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@mixin f-backgroundContain($imgUrl) {
+  background-image: url($imgUrl);
+  background-position: 50% 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+// 定义一个变量，防止每个单页面文件都重复引入
+@mixin f-clearfix() {
+  &::after {
+    content: '';
+    clear: both;
+    display: block;
+    height: 0;
+    font-size: 0;
+  }
+}
+@mixin f-flex() {
+  display: flex;
+}
+@mixin f-horizontalCenter() {
+  display: flex;
+  justify-content: center;
+}
+@mixin f-verticalCenter() {
+  display: flex;
+  align-items: center;
+}
+@mixin f-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin f-columnCenter() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@mixin f-flexWrap() {
+  flex-wrap: wrap;
+}
+@mixin f-flex-jc-sb() {
+  justify-content: space-between;
+}
+@mixin f-flex-jc-sa() {
+  justify-content: space-around;
+}
+@mixin f-flex-ac-center() {
+  align-content: center;
+}
+@mixin f-flex-ai-start() {
+  align-items: flex-start;
+}
+@mixin f-flex-ai-end() {
+  align-items: flex-end;
+}
+@mixin f-flexOne() {
+  flex: 1;
+}
+
+// 固定
+@mixin f-fixed() {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  // 防止抖动
+  -webkit-transform: translateZ(0);
+}
+
+// 单行文字隐藏
+@mixin f-txtHide() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin f-multiTxtHide($num: 2) {
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $num;
+  -webkit-box-orient: vertical;
+}
+
+@mixin f-absolute() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// 绝对定义居中
+@mixin f-absoluteCenter() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin f-absoluteHorizontalCenter() {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin f-absoluteVerticalCenter() {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin f-clickable() {
+  background: $c-bg;
+}
+
+@mixin f-hideInputAutoFillBg() {
+  transition: background-color 999999s ease-in-out 0s;
+}
+
+@mixin f-bs-white-box {
+  border-radius: 5px;
+  background: #fff;
+  padding: $n-space;
+}
+
+@mixin f-disabled() {
+  -webkit-text-fill-color: #333;
+  opacity: 0.5 !important;
+  color: #333 !important;
+}
+
+@mixin u-btn() {
+  width: 86px;
+  height: 28px;
+  // padding: 0 10px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  @include f-center;
+}
+
+@mixin u-btn-primary() {
+  @include u-btn;
+  background: $c-primary;
+  color: #fff;
+}
+
+@mixin u-btn-plain() {
+  @include u-btn;
+  color: $c-primary;
+  border: solid 1px currentColor;
+  background: #D2DEF5;
+}

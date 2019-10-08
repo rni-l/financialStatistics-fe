@@ -1,0 +1,36 @@
+.clickable {
+  &:active {
+    @include f-clickable;
+  }
+}
+
+.c-primary {
+  color: $c-primary;
+}
+
+.c-danger {
+  color: $c-danger;
+}
+
+// 隐藏输入框自动填充背景
+.f-hideInputAutoFillBg {
+  &:-webkit-autofill {
+    @include f-hideInputAutoFillBg;
+  }
+}
+
+// 最小字体，在 375 宽度时，字体大小为 12px，则在 320px 稿子的字体大小也为 12px，不转为 rem
+.f-minFs {
+  font-size: 12px;
+}
+
+@media screen and (max-width: 320px) {
+  .f-minFs {
+    font-size: 12px;/* no */
+  }
+}
+
+// @font-face {
+//   font-family: DIN-Condensed;
+//   src: url('../assets/font/DIN-Condensed-Bold-2.ttf')
+// }

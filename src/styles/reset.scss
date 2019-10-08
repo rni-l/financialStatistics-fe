@@ -1,0 +1,71 @@
+// 浏览器默认样式
+html,body{
+  background: $c-bg;
+  line-height: 1;
+  // 使用具有回弹效果的滚动, 当手指从触摸屏上移开，内容会继续保持一段时间的滚动效果。继续滚动的速度和持续的时间和滚动手势的强烈程度成正比。同时也会创建一个新的堆栈上下文。
+  -webkit-overflow-scrolling: touch;
+
+  // 去掉后IOS元素点击会出现灰色背景
+  -webkit-tap-highlight-color: transparent; 
+
+  //Android手机圆角失效
+  background-clip: padding-box;
+
+  // 禁止 iOS 弹出各种操作窗口
+  // -webkit-touch-callout: none;
+
+  // font-family: $fa-default;
+
+  // android上去掉语音输入按钮
+  input::-webkit-input-speech-button {display: none};
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+img, input, button, textarea {
+  border: none;
+}
+input, button {
+  outline: 0;
+  background: transparent;
+  box-shadow: none;
+  &:focus {
+    outline: none;
+  }
+}
+textarea {
+  resize: none;
+}
+// h1, h2, h3, h4, h5, h6
+h1, h2, h3, h4, h5, h6, a, input, select, button, option, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  line-height: inherit;
+  color: inherit;
+  outline: none;
+}
+
+/*取消部分浏览器`input[type='number']`的默认样式*/
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+// 不可点击时底色不变
+input:disabled{
+  background-color: transparent;
+}
