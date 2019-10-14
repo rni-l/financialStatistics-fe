@@ -1,12 +1,23 @@
 import { UserState } from '../../../types/store';
 import { ActionContextBasic } from '../../../types/store.d';
+import { AdminUserInfo } from '@/api/adminUser';
 
 const state: UserState = {
-  isLogin: false
+  isLogin: false,
+  userInfo: {
+    id: 0,
+    name: '',
+    createdTime: '',
+    status: 0
+  }
 },
   mutations = {
     updateIsLogin(state: UserState, value: boolean) {
       state.isLogin = value;
+    },
+
+    updateUserInfo(state: UserState, value: AdminUserInfo) {
+      state.userInfo = value
     }
   },
   actions = {

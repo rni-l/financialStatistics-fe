@@ -15,3 +15,4 @@ declare module 'better-scroll';
 declare module 'vue-touch';
 declare module 'pinyin';
 declare module 'vue-awesome-swiper';
+declare module '@smallwei/avue'

@@ -1,4 +1,5 @@
 import Vuex, { Commit, Dispatch, CommitOptions } from 'vuex';
+import { AdminUserInfo } from '@/api/adminUser';
 
 export interface ActionContextBasic {
   commit: Commit;
@@ -16,6 +17,7 @@ export interface UpdatePageCahceListOpts {
 
 export interface UserState {
   isLogin: boolean;
+  userInfo: AdminUserInfo
 }
 
 export interface DicData {

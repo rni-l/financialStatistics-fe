@@ -7,18 +7,15 @@ import App from './App.vue'
 import router from './router'
 import initPermission from './router/permission'
 import store from './store/index'
-// import VConsole from 'vconsole';
+import Avue from '@smallwei/avue';
+import '@smallwei/avue/lib/index.css';
 
 const isDev = process.env.VUE_APP_MODE === 'develop',
   isTest = process.env.VUE_APP_MODE === 'beta'
 Vue.config.devtools = process.env.VUE_APP_MODE !== 'production'
 Vue.config.productionTip = process.env.VUE_APP_MODE !== 'production'
 Vue.use(Element)
-/* eslint-disable no-new */
-if (isDev) {
-  // new VConsole();
-}
-// new VConsole();
+Vue.use(Avue)
 
 installDepend()
 initPermission()
