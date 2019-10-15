@@ -3,6 +3,7 @@ import { commonFormConfig } from '@/config/formConfig';
 
 export const options = {
   ...commonTableConfig,
+  menuWidth: '240px',
   column: [
     {
       label: '名称',

@@ -5,3 +5,4 @@ export const STORE = `${BASE}/store`
 export const STAFF = `${BASE}/staff`
 export const JOB = `${BASE}/job`
 export const BILL = `${BASE}/bill`
+export const STATISTICS = `${BASE}/statistics`

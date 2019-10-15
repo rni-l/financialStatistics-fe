@@ -14,11 +14,18 @@
           <el-button 
             @click.native="handleAdd(scope)" 
             type="primary" size="mini">新增</el-button>
+          <el-button 
+            @click.native="handleExport(scope)" 
+            type="primary" size="mini">导出 excel</el-button>
         </template>
         <template slot-scope="scope" slot="menu">
           <el-button 
             @click.native="handleEditClick(scope.row)" 
             type="primary" size="mini">修改</el-button>
+          <el-button
+            v-if="scope.row.status !== 1"
+            @click.native="handleUpdateStatus(scope.row)" 
+            type="primary" size="mini">确认收款</el-button>
           <el-button 
             @click.native="handleDelete(scope.row)" 
             type="danger" size="mini">删除</el-button>
@@ -37,7 +44,8 @@
 <script lang="ts">
 import { Component, Vue, Mixins, Ref } from 'vue-property-decorator'
 import handlePageMixin from '@/mixins/handlePage'
-import { apiBillGetList, BillItem, apiBillDeleteById } from '@/api/bill'
+import { apiBillGetList, BillItem, apiBillDeleteById, apiBillUpdateStautsById } from '@/api/bill'
+import { apiStatisticsStaffSalryPath } from '@/api/statistics'
 import UDialog from './Dialog.vue'
 import { options } from './indexConfig'
 
@@ -97,6 +105,19 @@ export default class Bill extends Mixins(handlePageMixin) {
         this.handleUpdate()
       }
     })
+  }
+
+  async handleUpdateStatus(row: BillItem) {
+    const { isSuccess } = await apiBillUpdateStautsById({ id: row.id }, { isLoading: true })
+    if (isSuccess) {
+      this.$message.success('操作成功')
+      this.handleUpdate()
+    }
+  }
+
+  async handleExport() {
+    // await apiStatisticsStaffSalryPath({ isLoading: true })
+    window.open(apiStatisticsStaffSalryPath)
   }
 }
 </script>

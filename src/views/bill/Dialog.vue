@@ -38,6 +38,12 @@ const dicDataMap: ObjectKey = {
 interface BillStaffInfoFull extends BillStaffInfo {
   name: string
 }
+interface Form {
+  name: BillItem['name']
+  price: BillItem['price']
+  staffInfo: number[]
+  openDate: BillItem['openDate']
+}
 @Component({
   components: {}
 })
@@ -45,7 +51,7 @@ export default class Dialog extends Mixins(toggleShowMixin) {
   @Prop() id!: BillItem['id']
 
   isAdd = true
-  form: BillAddParams = {
+  form: Form = {
     name: '',
     price: 0,
     openDate: Date.now(),
@@ -147,11 +153,16 @@ export default class Dialog extends Mixins(toggleShowMixin) {
   async getDetail() {
     const { isSuccess, data } = await apiBillGetDetailById({ id: this.id }, { isLoading: true })
     if (isSuccess) {
+      this.staffInfo = data.staffs.map(v => ({
+        name: v.name,
+        staffId: v.id,
+        ratio: v.ratio
+      }))
       this.form = {
         name: data.name,
         price: data.price,
         openDate: data.openDate,
-        staffInfo: []
+        staffInfo: data.staffs.map(v => v.id)
       }
     }
   }
