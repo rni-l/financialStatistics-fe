@@ -1,7 +1,7 @@
 export const RESULT_CODES = ['200', 200, '00000000'];
 
 export const RELOGIN_STATUS = 401;
-export const RELOGIN_CODES = ['23994002'];
+export const RELOGIN_CODES = [555];
 export const RELOGIN_TITLE = '警告';
 export const RELOGIN_MESSAGE = '登录超时！请重新登录';
 

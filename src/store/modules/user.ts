@@ -2,14 +2,27 @@ import { UserState } from '../../../types/store';
 import { ActionContextBasic } from '../../../types/store.d';
 import { AdminUserInfo } from '@/api/adminUser';
 
-const state: UserState = {
-  isLogin: false,
-  userInfo: {
-    id: 0,
-    name: '',
-    createdTime: '',
-    status: 0
+let userInfo = {
+  id: 0,
+  name: '',
+  createdTime: '',
+  status: 0
+}
+
+try {
+  const _userInfo = JSON.parse(localStorage.userInfo)
+  userInfo = {
+    id: _userInfo.id || 0,
+    name: _userInfo.name || '',
+    createdTime: _userInfo.createdTime || '',
+    status: _userInfo.status || 0
   }
+} catch (error) {
+}
+
+const state: UserState = {
+  isLogin: !!userInfo.id,
+  userInfo
 },
   mutations = {
     updateIsLogin(state: UserState, value: boolean) {

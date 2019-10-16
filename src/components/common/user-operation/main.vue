@@ -48,7 +48,7 @@ export default class LuUserOperation extends Vue {
       timeCut = '深夜好';
     }
     // const username = this.username || this.userInfo.username || (this.userInfo.userInfoMap ? this.userInfo.userInfoMap.realName : '');
-    const username = 'admin'
+    const username = this.username || 'admin'
     return `${timeCut}${username ? ('，' + username) : ''}`;
   }
 
@@ -60,7 +60,7 @@ export default class LuUserOperation extends Vue {
     }).then(() => {
       if (!this.logout) {
         // 依赖 store
-        this.$store.dispatch('LogOut').then(() => {
+        this.$store.dispatch('logout').then(() => {
           this.$router.push({ path: '/login' });
           this.$nextTick(() => {
             window.location.reload();

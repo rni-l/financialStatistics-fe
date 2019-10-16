@@ -21,6 +21,7 @@ export const apiAdminUserLogin = (params: AdminUserLoginParams, opts?: RequestOp
     params
   }).then(res => {
     if (res.isSuccess) {
+      store.commit('updateIsLogin', true)
       store.commit('updateUserInfo', res.data)
     }
     return res

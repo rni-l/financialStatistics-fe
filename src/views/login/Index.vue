@@ -54,10 +54,11 @@ export default class Login extends Vue {
   async login() {
     this.isLoading = true
     const { name, password } = this.ruleForm
-    const { isSuccess } = await apiAdminUserLogin({ name, password })
+    const { isSuccess, data } = await apiAdminUserLogin({ name, password })
     this.isLoading = false
     if (isSuccess) {
-      this.$router.push({ name: 'store' })
+      localStorage.userInfo = JSON.stringify(data)
+      this.$router.push({ name: 'bill' })
     }
   }
 }

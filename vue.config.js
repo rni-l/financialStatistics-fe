@@ -4,16 +4,16 @@ const path = require('path'),
   privateConfig = require('./private-config')
 
 function resolve(dir) {
-  return path.join(__dirname, dir);
+  return path.join(__dirname, dir)
 }
 
 const isDev = process.env.VUE_APP_MODE === 'develop',
-  isPro = process.env.VUE_APP_MODE === 'production';
+  isPro = process.env.VUE_APP_MODE === 'production'
 
 module.exports = {
   // eslint-loader 是否在保存的时候检查
   publicPath: './',
-  outputDir: '../build/calculatorApp',
+  outputDir: './dist/financialStatistics_fe',
   lintOnSave: false,
   productionSourceMap: true,
   chainWebpack: config => {
@@ -24,7 +24,7 @@ module.exports = {
       .set('@api', resolve('src/api'))
       .set('@views', resolve('src/views'))
       .set('@style', resolve('src/style'))
-      .set('@utils', resolve('src/utils'));
+      .set('@utils', resolve('src/utils'))
     // config.performance
     //   .hints(false)
     //   .maxEntrypointSize(10000000000)
@@ -37,9 +37,9 @@ module.exports = {
      * 而且预渲染时生成的 prefetch 标签是 modern 版本的，低版本浏览器是不需要的
      */
     // entry.add('babel-polyfill').end()
-    config.plugins.delete('prefetch').delete('preload');
+    config.plugins.delete('prefetch').delete('preload')
     if (process.env.npm_config_report) {
-      config.plugin('webpack-bundle-analyzer').use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+      config.plugin('webpack-bundle-analyzer').use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
     }
   },
   configureWebpack: {
@@ -82,4 +82,4 @@ module.exports = {
     // ...
   },
   transpileDependencies: []
-};
+}

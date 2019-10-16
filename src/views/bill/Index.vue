@@ -38,6 +38,11 @@
       :id="selectId"
       @update="handleUpdate"
     />
+
+    <export-dialog
+      :isShow.sync="isShowExportDialog"
+      ref="exportDialog"
+    />
   </div>
 </template>
 
@@ -45,13 +50,15 @@
 import { Component, Vue, Mixins, Ref } from 'vue-property-decorator'
 import handlePageMixin from '@/mixins/handlePage'
 import { apiBillGetList, BillItem, apiBillDeleteById, apiBillUpdateStautsById } from '@/api/bill'
-import { apiStatisticsStaffSalryPath } from '@/api/statistics'
+// import { apiStatisticsStaffSalryPath } from '@/api/statistics'
 import UDialog from './Dialog.vue'
+import ExportDialog from './ExportDialog.vue'
 import { options } from './indexConfig'
 
 @Component({
   components: {
-    UDialog
+    UDialog,
+    ExportDialog
   },
   filters: {
     formatPrice(val: number) {
@@ -63,6 +70,7 @@ export default class Bill extends Mixins(handlePageMixin) {
   @Ref() readonly dialog!: UDialog
   list: BillItem[] = []
   options = options
+  isShowExportDialog = false
   selectId: BillItem['id'] = 0
 
   async getList() {
@@ -116,8 +124,8 @@ export default class Bill extends Mixins(handlePageMixin) {
   }
 
   async handleExport() {
-    // await apiStatisticsStaffSalryPath({ isLoading: true })
-    window.open(apiStatisticsStaffSalryPath)
+    // window.open(apiStatisticsStaffSalryPath)
+    this.isShowExportDialog = true
   }
 }
 </script>

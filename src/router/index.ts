@@ -8,11 +8,12 @@ export default new Router({
   routes: [
     {
       path: '*',
-      redirect: { name: '404' }
+      redirect: { name: 'bill' }
     },
     {
       path: '/',
       name: 'layout',
+      redirect: { name: 'bill' },
       component: () => import('@/layout/Index.vue'),
       children: [
         {

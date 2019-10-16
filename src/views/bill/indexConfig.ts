@@ -10,7 +10,7 @@ export const options = {
       prop: 'name'
     },
     {
-      label: '金额',
+      label: '金额（元）',
       prop: 'price'
     },
     {
