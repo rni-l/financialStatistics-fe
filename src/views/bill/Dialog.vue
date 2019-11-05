@@ -14,8 +14,11 @@
         <template slot="ratio">
           <div class='staff-wrap'>
             <div v-for="v in staffInfo" :key="v.staffId" class="staff-item">
-              <div class="label">{{ v.name }}</div>
+              <div class="label">{{ v.name }} - </div>
+              <div class="input-type">订单比率:</div>
               <el-input-number type="number" v-model.trim="v.ratio" />
+              <div class="input-type">个人提成比率:</div>
+              <el-input-number type="number" v-model.trim="v.staffRatio" />
             </div>
           </div>
         </template>
@@ -37,6 +40,7 @@ const dicDataMap: ObjectKey = {
 }
 interface BillStaffInfoFull extends BillStaffInfo {
   name: string
+  staffRatio: number
 }
 interface Form {
   name: BillItem['name']
@@ -82,6 +86,7 @@ export default class Dialog extends Mixins(toggleShowMixin) {
       if (obj) return obj
       return {
         ratio: 0,
+        staffRatio: 0,
         name: staff ? staff.label : '',
         staffId: v
       }
@@ -139,7 +144,7 @@ export default class Dialog extends Mixins(toggleShowMixin) {
       name,
       price,
       openDate,
-      staffInfo: this.staffInfo.map(v => ({ ratio: v.ratio, staffId: v.staffId }))
+      staffInfo: this.staffInfo.map(v => ({ ratio: v.ratio, staffId: v.staffId, staffRatio: v.staffRatio }))
     }
     const { isSuccess } = await (this.isAdd ? apiBillAdd(obj, { isLoading: true }) : apiBillUpdate({ ...obj, id: this.id }, { isLoading: true }))
     if (isSuccess) {
@@ -156,7 +161,8 @@ export default class Dialog extends Mixins(toggleShowMixin) {
       this.staffInfo = data.staffs.map(v => ({
         name: v.name,
         staffId: v.id,
-        ratio: v.ratio
+        staffRatio: v.staffRatio || 0,
+        ratio: v.ratio || 0
       }))
       this.form = {
         name: data.name,
@@ -178,7 +184,7 @@ export default class Dialog extends Mixins(toggleShowMixin) {
     flex-wrap: wrap;
     .staff-item {
       @include f-center;
-      width: 45%;
+      width: 100%;
       padding-bottom: 15px;
       &:nth-child(odd) {
         // padding-right: 8px;
@@ -186,6 +192,9 @@ export default class Dialog extends Mixins(toggleShowMixin) {
       .label {
         white-space: nowrap;
         padding-right: 8px;
+      }
+      .input-type {
+        padding: 0 12px;
       }
     }
   }

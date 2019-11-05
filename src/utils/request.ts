@@ -113,13 +113,12 @@ export default <T>({ url = '', params = {}, headers = {}, axiosConfig = {}, meth
   })
     .then(({ data = {} }) => {
       const { code, msg } = data,
-        isMatchCode = RESULT_CODES.includes(code),
-        _msg = msg || ERROR_MSG;
+        isMatchCode = RESULT_CODES.includes(code)
       // 如果 isMessage && 业务 code 不存在 resultCode 中，则显示错误提示
       if (isMessage && !isMatchCode) {
         Notification.error({
           title: '警告',
-          message: _msg
+          message: typeof data.data !== 'string' ? ERROR_MSG : data.data
         });
         if (RELOGIN_CODES.includes(code)) {
           store.dispatch(DISPATCH_RELOGIN_PATH);
@@ -127,7 +126,7 @@ export default <T>({ url = '', params = {}, headers = {}, axiosConfig = {}, meth
       }
       return {
         ...data,
-        msg: _msg,
+        msg: '',
         isSuccess: isMatchCode
       };
     })

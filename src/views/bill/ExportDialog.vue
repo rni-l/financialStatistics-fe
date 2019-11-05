@@ -39,6 +39,7 @@ export default class ExportDialog extends Mixins(toggleShowMixin) {
   values: number[] = []
 
   async handleExport() {
+    console.log(this.values)
     window.open(apiStatisticsStaffSalryPath + `?startDate=${this.values[0]}&endDate=${this.values[1]}`)
   }
 

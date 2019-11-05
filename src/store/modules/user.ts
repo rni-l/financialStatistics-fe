@@ -40,6 +40,7 @@ const state: UserState = {
     logout({ commit }: ActionContextBasic) {
       return new Promise((resolve, reject) => {
         commit('updateIsLogin', false);
+        localStorage.userInfo = undefined
         window.location.reload();
         resolve();
       });

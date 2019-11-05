@@ -33,6 +33,7 @@ export const apiBillGetList = (params: BillGetListParams, opts?: RequestOpts) =>
 
 export interface BillAddStffInfoParams {
   ratio: number
+  staffRatio: number
   staffId: StaffItem['id']
 }
 
@@ -87,6 +88,7 @@ export interface BillDetailParams {
 export interface BillDetailStaff {
   id: StaffItem['id']
   ratio: number
+  staffRatio: number
   name: string
 }
 export interface BillDetail extends BillItem {
@@ -111,5 +113,18 @@ export const apiBillUpdateStautsById = (params: BillUpdateStatusParams, opts?: R
     url: `${BILL}/updateStatus/${params.id}`,
     ...opts,
     method: 'get'
+  })
+}
+
+export interface BillUpdateReceiveDateParams {
+  receiveDate: number
+  id: BillItem['id']
+}
+
+export const apiBillUpdateReceiveDate = (params: BillUpdateReceiveDateParams, opts?: RequestOpts) => {
+  return request<any>({
+    url: `${BILL}/updateReceiveDate/${params.id}`,
+    ...opts,
+    method: 'put'
   })
 }

@@ -23,6 +23,10 @@
             @click.native="handleEditClick(scope.row)" 
             type="primary" size="mini">修改</el-button>
           <el-button
+            v-if="scope.row.status === 1"
+            @click.native="handleUpdateReceiveDate(scope.row)" 
+            type="primary" size="mini">修改收款时间</el-button>
+          <el-button
             v-if="scope.row.status !== 1"
             @click.native="handleUpdateStatus(scope.row)" 
             type="primary" size="mini">确认收款</el-button>
@@ -43,6 +47,12 @@
       :isShow.sync="isShowExportDialog"
       ref="exportDialog"
     />
+
+    <export-dialog
+      :isShow.sync="isShowUpdateReceiveDateDialog"
+      :id="selectId"
+      @update="getList"
+    />
   </div>
 </template>
 
@@ -53,12 +63,14 @@ import { apiBillGetList, BillItem, apiBillDeleteById, apiBillUpdateStautsById } 
 // import { apiStatisticsStaffSalryPath } from '@/api/statistics'
 import UDialog from './Dialog.vue'
 import ExportDialog from './ExportDialog.vue'
+import UpdateReceiveDateDialog from './UpdateReceiveDateDialog.vue'
 import { options } from './indexConfig'
 
 @Component({
   components: {
     UDialog,
-    ExportDialog
+    ExportDialog,
+    UpdateReceiveDateDialog
   },
   filters: {
     formatPrice(val: number) {
@@ -71,13 +83,17 @@ export default class Bill extends Mixins(handlePageMixin) {
   list: BillItem[] = []
   options = options
   isShowExportDialog = false
+  isShowUpdateReceiveDateDialog = false
   selectId: BillItem['id'] = 0
 
   async getList() {
     const { currentPage, pageSize } = this.page
     const { isSuccess, data } = await apiBillGetList({
       curPage: currentPage,
-      pageSize
+      pageSize,
+      ...this.search,
+      order: 'open_date',
+      orderType: 'DESC'
     })
     if (isSuccess) {
       this.page.total = data.count
@@ -92,6 +108,11 @@ export default class Bill extends Mixins(handlePageMixin) {
   handleAdd() {
     this.dialog.reset()
     this.dialog.show(false)
+  }
+
+  handleUpdateReceiveDate({ id }: BillItem) {
+    this.selectId = id
+    this.isShowUpdateReceiveDateDialog = true
   }
 
   handleEditClick(row: BillItem) {

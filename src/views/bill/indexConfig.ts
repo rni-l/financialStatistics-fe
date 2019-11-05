@@ -1,33 +1,50 @@
-import { commonTableConfig } from '../../config/tableConfig';
-import { commonFormConfig } from '@/config/formConfig';
+import { commonTableConfig } from '../../config/tableConfig'
+import { commonFormConfig } from '@/config/formConfig'
+import dayjs from 'dayjs'
 
 export const options = {
   ...commonTableConfig,
-  menuWidth: '240px',
+  menuWidth: '280px',
   column: [
     {
       label: '名称',
+      minWidth: 180,
+      search: true,
+      searchSpan: 8,
       prop: 'name'
     },
     {
       label: '金额（元）',
+      minWidth: 100,
       prop: 'price'
     },
     {
       label: '开单时间',
       prop: 'openDate',
+      search: true,
+      minWidth: 180,
+      searchSpan: 8,
+      valueFormat: 'timestamp',
       type: 'date',
-      format: 'yyyy/MM/dd HH:mm:ss',
+      format: 'yyyy/MM/dd HH:mm:ss'
     },
     {
       label: '收钱时间',
       prop: 'receiveDate',
+      minWidth: 180,
+      search: true,
+      searchSpan: 8,
+      valueFormat: 'timestamp',
       type: 'date',
-      format: 'yyyy/MM/dd HH:mm:ss',
+      formatter: (val: any) => (val.receiveDate ? dayjs(val.receiveDate).format('YYYY/MM/DD HH:mm:ss') : '-')
     },
     {
       label: '状态',
       prop: 'status',
+      search: true,
+      searchSpan: 8,
+      type: 'select',
+      dicData: [{ label: '全部', value: '' }, { label: '未收款', value: 0 }, { label: '已收款', value: 1 }],
       slot: true
     }
   ]
@@ -102,6 +119,6 @@ export const formOptions = {
       slot: true,
       formSlot: true,
       span: 24
-    },
+    }
   ]
 }
